@@ -1,0 +1,882 @@
+/* ============================================
+   ROMANTIC TULIP GARDEN - STYLE.CSS
+   A cinematic romantic webpage for Rebika Szabo
+   UPLOAD THIS FILE TO GITHUB
+   ============================================ */
+
+/* ============================================
+   CSS CUSTOM PROPERTIES - Color palette inspired
+   by golden hour sunset photography
+   ============================================ */
+:root {
+    /* Sunset sky colors */
+    --sky-top: #1a0533;
+    --sky-mid: #4a1942;
+    --sky-low: #c84b31;
+    --sky-horizon: #ffcb74;
+    
+    /* Nature colors - realistic warm palette */
+    --grass-dark: #1a3a1a;
+    --grass-mid: #2d5a27;
+    --grass-light: #4a7c3f;
+    --grass-highlight: #6b9b37;
+    
+    /* Tulip colors - rich, natural shades */
+    --tulip-red: #c0392b;
+    --tulip-red-dark: #7b241c;
+    --tulip-pink: #e74c8b;
+    --tulip-pink-dark: #a0315e;
+    --tulip-orange: #e67e22;
+    --tulip-yellow: #f4d03f;
+    --tulip-purple: #8e44ad;
+    --tulip-white: #fdf2e9;
+    
+    /* Atmospheric colors */
+    --golden-light: rgba(255, 200, 100, 0.3);
+    --warm-glow: rgba(255, 150, 50, 0.15);
+    --mist: rgba(255, 255, 255, 0.05);
+    
+    /* UI colors */
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-shadow: rgba(0, 0, 0, 0.3);
+    --text-primary: #fff8f0;
+    --text-secondary: rgba(255, 248, 240, 0.85);
+    --text-accent: #ffd700;
+}
+
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Cormorant Garamond', serif;
+    background: #0a0a0a;
+    color: var(--text-primary);
+    cursor: default;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   LOADING SCREEN - Cinematic entrance
+   ============================================ */
+#loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: radial-gradient(ellipse at center bottom, #1a0533, #000);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1.5s ease, visibility 1.5s ease;
+}
+
+#loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loading-content {
+    text-align: center;
+}
+
+.loading-flower {
+    font-size: 4rem;
+    animation: loadingPulse 1.5s ease-in-out infinite;
+}
+
+.loading-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+    margin: 1.5rem 0;
+    font-style: italic;
+}
+
+.loading-bar {
+    width: 200px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.loading-progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--tulip-pink), var(--text-accent));
+    border-radius: 2px;
+    animation: loadingFill 2.5s ease-in-out forwards;
+}
+
+@keyframes loadingPulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
+@keyframes loadingFill {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+/* ============================================
+   PARTICLE CANVAS - Full viewport overlay
+   ============================================ */
+#particle-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================
+   SKY LAYER - Dynamic gradient background
+   Simulates golden hour sunset
+   ============================================ */
+#sky-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+        180deg,
+        var(--sky-top) 0%,
+        var(--sky-mid) 25%,
+        #8b3a62 40%,
+        var(--sky-low) 60%,
+        #e8824a 75%,
+        var(--sky-horizon) 90%,
+        #fff5e0 100%
+    );
+    transition: background 3s ease;
+}
+
+/* ============================================
+   CLOUDS - Realistic soft shapes using
+   box-shadow and border-radius
+   ============================================ */
+.cloud {
+    position: absolute;
+    background: rgba(255, 200, 150, 0.12);
+    border-radius: 50%;
+    filter: blur(30px);
+    animation: cloudDrift linear infinite;
+    will-change: transform;
+}
+
+.cloud-1 {
+    width: 400px;
+    height: 80px;
+    top: 8%;
+    left: -10%;
+    animation-duration: 120s;
+    opacity: 0.6;
+}
+
+.cloud-2 {
+    width: 600px;
+    height: 100px;
+    top: 15%;
+    left: 20%;
+    animation-duration: 150s;
+    animation-delay: -30s;
+    opacity: 0.4;
+}
+
+.cloud-3 {
+    width: 350px;
+    height: 60px;
+    top: 5%;
+    left: 50%;
+    animation-duration: 100s;
+    animation-delay: -50s;
+    opacity: 0.5;
+}
+
+.cloud-4 {
+    width: 500px;
+    height: 90px;
+    top: 20%;
+    left: 70%;
+    animation-duration: 180s;
+    animation-delay: -80s;
+    opacity: 0.3;
+}
+
+.cloud-5 {
+    width: 450px;
+    height: 70px;
+    top: 12%;
+    left: -20%;
+    animation-duration: 140s;
+    animation-delay: -100s;
+    opacity: 0.35;
+}
+
+@keyframes cloudDrift {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(calc(100vw + 100%)); }
+}
+
+/* ============================================
+   SUN - Golden hour sun with glow
+   ============================================ */
+#sun {
+    position: fixed;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, #fff8dc, #ffcc33, #ff8c00);
+    box-shadow: 
+        0 0 60px rgba(255, 200, 50, 0.6),
+        0 0 120px rgba(255, 150, 0, 0.4),
+        0 0 200px rgba(255, 100, 0, 0.2),
+        0 0 400px rgba(255, 80, 0, 0.1);
+    z-index: 2;
+    animation: sunPulse 8s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+    0%, 100% { 
+        box-shadow: 
+            0 0 60px rgba(255, 200, 50, 0.6),
+            0 0 120px rgba(255, 150, 0, 0.4),
+            0 0 200px rgba(255, 100, 0, 0.2);
+    }
+    50% { 
+        box-shadow: 
+            0 0 80px rgba(255, 200, 50, 0.7),
+            0 0 160px rgba(255, 150, 0, 0.5),
+            0 0 260px rgba(255, 100, 0, 0.3);
+    }
+}
+
+/* ============================================
+   STARS CONTAINER - Night sky stars
+   ============================================ */
+#stars-container {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 5s ease;
+}
+
+#stars-container.visible {
+    opacity: 1;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    animation: starTwinkle ease-in-out infinite;
+    box-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes starTwinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* ============================================
+   PARALLAX HILLS - Background depth layers
+   ============================================ */
+#parallax-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.hill {
+    position: absolute;
+    bottom: 0;
+    left: -5%;
+    width: 110%;
+    border-radius: 50% 50% 0 0;
+}
+
+.hill-far {
+    height: 35%;
+    background: linear-gradient(180deg, #1a2a1a, #0f1a0f);
+    opacity: 0.7;
+    transform: translateY(5%);
+}
+
+.hill-mid {
+    height: 30%;
+    background: linear-gradient(180deg, #1e3a1e, #152a15);
+    opacity: 0.85;
+    transform: translateY(10%);
+}
+
+.hill-near {
+    height: 28%;
+    background: linear-gradient(180deg, var(--grass-dark), #0d1f0d);
+    transform: translateY(12%);
+}
+
+/* ============================================
+   GARDEN CONTAINER - Main flower area
+   ============================================ */
+#garden-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* ============================================
+   GRASS LAYER - Realistic grass field
+   ============================================ */
+#grass-layer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(26, 58, 26, 0.3) 20%,
+        var(--grass-dark) 50%,
+        #0d1a0d 100%
+    );
+}
+
+#grass-layer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+        repeating-linear-gradient(
+            85deg,
+            transparent,
+            transparent 2px,
+            rgba(74, 124, 63, 0.1) 2px,
+            rgba(74, 124, 63, 0.1) 3px
+        );
+    animation: grassWind 4s ease-in-out infinite;
+}
+
+@keyframes grassWind {
+    0%, 100% { transform: skewX(0deg); }
+    25% { transform: skewX(0.5deg); }
+    75% { transform: skewX(-0.3deg); }
+}
+
+/* ============================================
+   TULIP FIELD - Individual tulip styles
+   Each tulip is a layered CSS element with
+   realistic petal shading and stem
+   ============================================ */
+#tulip-field {
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    right: 0;
+    height: 80%;
+}
+
+.tulip {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-origin: bottom center;
+    animation: tulipSway ease-in-out infinite;
+    will-change: transform;
+}
+
+/* Tulip stem - with natural curve */
+.tulip-stem {
+    width: 3px;
+    height: var(--stem-height, 120px);
+    background: linear-gradient(180deg, #3d6b35, #2a5a22, #1e4a18);
+    border-radius: 2px;
+    position: relative;
+    transform-origin: bottom center;
+}
+
+/* Stem leaf */
+.tulip-stem::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 40px;
+    background: linear-gradient(135deg, #4a7c3f, #2d5a27);
+    border-radius: 0 80% 50% 50%;
+    top: 40%;
+    left: 3px;
+    transform: rotate(-15deg);
+    opacity: 0.9;
+}
+
+/* Tulip flower head container */
+.tulip-head {
+    position: relative;
+    width: var(--head-size, 30px);
+    height: calc(var(--head-size, 30px) * 1.3);
+    margin-bottom: -2px;
+}
+
+/* Individual petal - layered for realism */
+.tulip-petal {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50% 50% 45% 45%;
+    background: var(--petal-color);
+    box-shadow: 
+        inset 0 -5px 15px rgba(0, 0, 0, 0.3),
+        inset 0 5px 10px rgba(255, 255, 255, 0.1);
+}
+
+.tulip-petal:nth-child(1) {
+    transform: rotate(-15deg) translateX(-20%);
+    opacity: 0.9;
+    filter: brightness(0.85);
+}
+
+.tulip-petal:nth-child(2) {
+    transform: rotate(15deg) translateX(20%);
+    opacity: 0.9;
+    filter: brightness(0.85);
+}
+
+.tulip-petal:nth-child(3) {
+    transform: rotate(-5deg);
+    filter: brightness(0.95);
+}
+
+.tulip-petal:nth-child(4) {
+    transform: rotate(5deg);
+    z-index: 1;
+}
+
+.tulip-petal:nth-child(5) {
+    transform: rotate(0deg) scale(0.9);
+    z-index: 2;
+    filter: brightness(1.05);
+}
+
+/* Tulip petal inner glow/highlight */
+.tulip-petal::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    width: 40%;
+    height: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    filter: blur(3px);
+}
+
+/* Sway animation - natural wind effect */
+@keyframes tulipSway {
+    0%, 100% { transform: rotate(0deg) translateX(0); }
+    20% { transform: rotate(var(--sway-amount, 2deg)) translateX(2px); }
+    40% { transform: rotate(calc(var(--sway-amount, 2deg) * -0.5)) translateX(-1px); }
+    60% { transform: rotate(var(--sway-amount, 2deg)) translateX(1.5px); }
+    80% { transform: rotate(calc(var(--sway-amount, 2deg) * -0.7)) translateX(-0.5px); }
+}
+
+/* Growing animation for tulips */
+.tulip.growing {
+    animation: tulipGrow 3s ease-out forwards, tulipSway 4s ease-in-out infinite 3s;
+    transform: scaleY(0);
+    transform-origin: bottom center;
+}
+
+@keyframes tulipGrow {
+    0% { transform: scaleY(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: scaleY(1); opacity: 1; }
+}
+
+/* ============================================
+   FALLING PETALS
+   ============================================ */
+#petals-container {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.falling-petal {
+    position: absolute;
+    width: var(--petal-size, 12px);
+    height: var(--petal-size, 12px);
+    background: var(--petal-bg, rgba(231, 76, 139, 0.7));
+    border-radius: 50% 0 50% 50%;
+    top: -20px;
+    animation: petalFall linear infinite;
+    will-change: transform;
+    filter: blur(0.5px);
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes petalFall {
+    0% {
+        transform: translateY(-10vh) rotate(0deg) translateX(0);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 0.8; }
+    100% {
+        transform: translateY(110vh) rotate(720deg) translateX(var(--drift, 100px));
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   LIGHT RAYS - Cinematic god rays
+   ============================================ */
+#light-rays {
+    position: fixed;
+    inset: 0;
+    z-index: 15;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.ray {
+    position: absolute;
+    top: -10%;
+    width: 200px;
+    height: 120%;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 200, 100, 0.15),
+        rgba(255, 200, 100, 0.05),
+        transparent
+    );
+    transform-origin: top center;
+    animation: rayPulse 8s ease-in-out infinite;
+    filter: blur(20px);
+}
+
+.ray-1 {
+    left: 30%;
+    transform: rotate(-10deg);
+    animation-delay: 0s;
+}
+
+.ray-2 {
+    left: 50%;
+    transform: rotate(5deg);
+    animation-delay: -3s;
+    opacity: 0.7;
+}
+
+.ray-3 {
+    left: 65%;
+    transform: rotate(15deg);
+    animation-delay: -5s;
+    opacity: 0.5;
+}
+
+@keyframes rayPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+}
+
+/* ============================================
+   CONTENT OVERLAY - Main text and message
+   ============================================ */
+#content-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    pointer-events: none;
+}
+
+/* ============================================
+   MAIN TITLE - Elegant entrance
+   ============================================ */
+.main-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3rem, 8vw, 6rem);
+    color: var(--text-primary);
+    text-shadow: 
+        0 0 20px rgba(255, 200, 100, 0.5),
+        0 0 40px rgba(255, 150, 50, 0.3),
+        0 2px 10px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    animation: titleReveal 2s ease-out 3s forwards;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+@keyframes titleReveal {
+    0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ============================================
+   GLASSMORPHISM MESSAGE PANEL
+   ============================================ */
+.message-panel {
+    max-width: 600px;
+    width: 90%;
+    padding: 2.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: 
+        0 20px 60px var(--glass-shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transform: translateY(40px);
+    animation: panelReveal 2s ease-out 4s forwards;
+    pointer-events: auto;
+}
+
+@keyframes panelReveal {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.message-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    line-height: 1.8;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+}
+
+.message-text.second-paragraph {
+    margin-bottom: 1.5rem;
+}
+
+.signature {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.5rem;
+    color: var(--text-accent);
+    text-align: right;
+    opacity: 0.9;
+}
+
+/* ============================================
+   MUSIC BUTTON - Glassmorphism style
+   ============================================ */
+.glass-btn {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.2rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    color: var(--text-primary);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    opacity: 0;
+    animation: fadeIn 1s ease 5s forwards;
+}
+
+.glass-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.glass-btn.playing .music-icon {
+    animation: musicPulse 1s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* ============================================
+   VIGNETTE - Cinematic dark edges
+   ============================================ */
+#vignette {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 50%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+}
+
+/* ============================================
+   FILM GRAIN - Subtle cinematic texture
+   ============================================ */
+#film-grain {
+    position: fixed;
+    inset: 0;
+    z-index: 350;
+    pointer-events: none;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    animation: grainShift 0.5s steps(1) infinite;
+}
+
+@keyframes grainShift {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-2px, 1px); }
+    50% { transform: translate(1px, -1px); }
+    75% { transform: translate(-1px, 2px); }
+    100% { transform: translate(2px, -2px); }
+}
+
+/* ============================================
+   FIREFLY STYLES
+   ============================================ */
+.firefly {
+    position: fixed;
+    width: 4px;
+    height: 4px;
+    background: #ffe066;
+    border-radius: 50%;
+    box-shadow: 
+        0 0 6px #ffe066,
+        0 0 12px rgba(255, 224, 102, 0.5),
+        0 0 20px rgba(255, 200, 50, 0.3);
+    z-index: 150;
+    pointer-events: none;
+    animation: fireflyGlow 3s ease-in-out infinite;
+}
+
+@keyframes fireflyGlow {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    30%, 70% { opacity: 1; transform: scale(1); }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+    .message-panel {
+        padding: 1.5rem;
+        border-radius: 18px;
+        margin-top: 1rem;
+    }
+    
+    .main-title {
+        margin-bottom: 1rem;
+    }
+    
+    .message-text {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+    
+    .signature {
+        font-size: 1.2rem;
+    }
+    
+    .glass-btn {
+        bottom: 1rem;
+        right: 1rem;
+        padding: 0.6rem 1rem;
+    }
+    
+    #sun {
+        width: 80px;
+        height: 80px;
+        top: 20%;
+    }
+    
+    .ray {
+        width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .message-panel {
+        padding: 1.2rem;
+    }
+    
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    #content-overlay {
+        padding: 1rem;
+        justify-content: flex-start;
+        padding-top: 15vh;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY - Reduced motion support
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================
+   SMOOTH SCROLL BEHAVIOR
+   ============================================ */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ============================================
+   SELECTION STYLING
+   ============================================ */
+::selection {
+    background: rgba(231, 76, 139, 0.3);
+    color: #fff;
+}

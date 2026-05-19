@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Szeretlek Rebika ❤️</title>
+    
+    <!-- UPLOAD THIS FILE TO GITHUB -->
+    
+    <!-- Google Fonts - Elegant romantic typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- ============================================
+         LOADING SCREEN - Cinematic entrance
+    ============================================ -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-flower">🌷</div>
+            <p class="loading-text">Készítem neked valamit különlegeset...</p>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         MAIN CANVAS - For particle effects, fireflies,
+         pollen, and bloom rendering
+    ============================================ -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- ============================================
+         SKY LAYER - Dynamic gradient sunset sky
+    ============================================ -->
+    <div id="sky-layer">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="cloud cloud-4"></div>
+        <div class="cloud cloud-5"></div>
+    </div>
+
+    <!-- ============================================
+         SUN/MOON - Celestial body
+    ============================================ -->
+    <div id="sun"></div>
+
+    <!-- ============================================
+         STARS LAYER - Appears during night transition
+    ============================================ -->
+    <div id="stars-container"></div>
+
+    <!-- ============================================
+         PARALLAX MOUNTAIN/HILL LAYERS
+    ============================================ -->
+    <div id="parallax-bg">
+        <div class="hill hill-far"></div>
+        <div class="hill hill-mid"></div>
+        <div class="hill hill-near"></div>
+    </div>
+
+    <!-- ============================================
+         TULIP GARDEN - Main flower field rendered
+         with CSS and enhanced via JS
+    ============================================ -->
+    <div id="garden-container">
+        <div id="grass-layer"></div>
+        <div id="tulip-field"></div>
+    </div>
+
+    <!-- ============================================
+         FALLING PETALS LAYER
+    ============================================ -->
+    <div id="petals-container"></div>
+
+    <!-- ============================================
+         CINEMATIC LIGHT RAYS
+    ============================================ -->
+    <div id="light-rays">
+        <div class="ray ray-1"></div>
+        <div class="ray ray-2"></div>
+        <div class="ray ray-3"></div>
+    </div>
+
+    <!-- ============================================
+         MAIN CONTENT - Romantic message
+    ============================================ -->
+    <div id="content-overlay">
+        <!-- Title with elegant entrance animation -->
+        <h1 class="main-title" id="main-title">Szeretlek Rebika ❤️</h1>
+        
+        <!-- Glassmorphism message panel -->
+        <div class="message-panel" id="message-panel">
+            <p class="message-text">
+                Amikor veled vagyok, minden sokkal szebbnek és nyugodtabbnak érződik. 
+                Olyan vagy nekem, mint egy gyönyörű virág, amely minden nap fényt és 
+                boldogságot hoz az életembe. 🌷
+            </p>
+            <p class="message-text second-paragraph">
+                Nagyon szeretlek, és soha nem akarom elveszíteni azt az érzést, 
+                amit melletted érzek. Köszönöm, hogy vagy nekem. 💕
+            </p>
+            <div class="signature">— Örökké a Tiéd</div>
+        </div>
+    </div>
+
+    <!-- ============================================
+         AMBIENT MUSIC CONTROL
+    ============================================ -->
+    <button id="music-btn" class="glass-btn" aria-label="Toggle ambient music">
+        <span class="music-icon">♪</span>
+        <span class="music-label">Zene</span>
+    </button>
+    <audio id="ambient-music" loop preload="auto">
+        <source src="assets/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- ============================================
+         VIGNETTE & CINEMATIC OVERLAYS
+    ============================================ -->
+    <div id="vignette"></div>
+    <div id="film-grain"></div>
+
+    <!-- Main JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
